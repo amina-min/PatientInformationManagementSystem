@@ -8,54 +8,63 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "information")
+@Table(name = "familyInfo")
 public class Information {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int patientId;
-	private String FamilyMemberName;
+	private String familyMemberName;
 	private String relationship;
-	private int phoneNo;
+	private int phonNo;
 	private String address;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getPatientId() {
 		return patientId;
 	}
+
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
+
 	public String getFamilyMemberName() {
-		return FamilyMemberName;
+		return familyMemberName;
 	}
+
 	public void setFamilyMemberName(String familyMemberName) {
-		FamilyMemberName = familyMemberName;
+		this.familyMemberName = familyMemberName;
 	}
+
 	public String getRelationship() {
 		return relationship;
 	}
+
 	public void setRelationship(String relationship) {
 		this.relationship = relationship;
 	}
-	public int getPhoneNo() {
-		return phoneNo;
+
+	public int getPhonNo() {
+		return phonNo;
 	}
-	public void setPhoneNo(int phoneNo) {
-		this.phoneNo = phoneNo;
+
+	public void setPhonNo(int phonNo) {
+		this.phonNo = phonNo;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-	
-	
+
 }

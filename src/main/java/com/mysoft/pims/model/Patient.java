@@ -11,6 +11,7 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -23,6 +24,7 @@ public class Patient {
 	private String patientName;
 	private String gender;
 	private int age;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dob;
 	private String phonNo;
 	private String email;

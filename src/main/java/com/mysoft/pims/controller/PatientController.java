@@ -94,7 +94,9 @@ public class PatientController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
-
+	
+	
+	
 	@PostMapping("/patientUpdate")
 	public ResponseEntity<?> update(@ModelAttribute Patient entity) {
 		Map<String, Object> map = new HashMap<>();

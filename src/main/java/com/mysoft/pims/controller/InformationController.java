@@ -59,6 +59,30 @@ public class InformationController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	
+	
+	@GetMapping("/getInformationtById/{patientId}")
+	public ResponseEntity<?> getInformationtById(@PathVariable  Integer patientId) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			Information info = repo.findById(patientId).get();
+			map.put("message", "Information get successfully");
+			map.put("data", info);
+			map.put("statusCode", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Information fetch failed");
+			map.put("data", null);
+			map.put("statusCode", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
+	
+	
+
 
 	@PostMapping("/informationUpdate")
 	public ResponseEntity<?> update(@RequestBody Information entity) {

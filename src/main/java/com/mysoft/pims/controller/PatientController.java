@@ -96,11 +96,12 @@ public class PatientController {
 	}
 
 	@PostMapping("/patientUpdate")
-	public ResponseEntity<?> update(@RequestBody Patient entity) {
+	public ResponseEntity<?> update(@ModelAttribute Patient entity) {
 		Map<String, Object> map = new HashMap<>();
+	System.out.println(entity.getId());
 		try {
 			Patient patient = repo.save(entity);
-			map.put("message", "Patient updated successfully");
+						map.put("message", "Patient updated successfully");
 			map.put("data", patient);
 			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);

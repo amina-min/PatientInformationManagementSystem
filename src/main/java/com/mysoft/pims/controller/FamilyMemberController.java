@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysoft.pims.model.Information;
-import com.mysoft.pims.repository.InformationRepo;
+import com.mysoft.pims.model.FamilyMember;
+import com.mysoft.pims.repository.FamilyMemberRepo;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class InformationController {
+public class FamilyMemberController {
 
 	@Autowired
-	private InformationRepo repo;
+	private FamilyMemberRepo repo;
 
 	@PostMapping("/familyMemberAdd")
-	public ResponseEntity<?> save(@RequestBody Information entity) {
+	public ResponseEntity<?> save(@RequestBody FamilyMember entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Information info = repo.save(entity);
+			FamilyMember info = repo.save(entity);
 			map.put("message", "Successfully saved");
 			map.put("data", info);
 			map.put("statusCode", 200);
@@ -46,7 +46,7 @@ public class InformationController {
 	public ResponseEntity<?> getInformation() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Information> info = (List<Information>) repo.findAll();
+			List<FamilyMember> info = (List<FamilyMember>) repo.findAll();
 			map.put("message", "Information get successfully");
 			map.put("data", info);
 			map.put("statusCode", 200);
@@ -62,13 +62,13 @@ public class InformationController {
 	
 	
 	
-	@GetMapping("/getInformationtById/{patientId}")
-	public ResponseEntity<?> getInformationtById(@PathVariable  Integer patientId) {
+	@GetMapping("/getFamilyMembers/{patientId}")
+	public ResponseEntity<?> getFamilyMembersByPatientId(@PathVariable  Integer patientId) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Information info = repo.findById(patientId).get();
+			List<FamilyMember> familyMembers = repo.findByPatientId(patientId);
 			map.put("message", "Information get successfully");
-			map.put("data", info);
+			map.put("data", familyMembers);
 			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -85,10 +85,10 @@ public class InformationController {
 
 
 	@PostMapping("/informationUpdate")
-	public ResponseEntity<?> update(@RequestBody Information entity) {
+	public ResponseEntity<?> update(@RequestBody FamilyMember entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Information info = repo.save(entity);
+			FamilyMember info = repo.save(entity);
 			map.put("message", "Information updated successfully");
 			map.put("data", info);
 			map.put("statusCode", 200);
@@ -105,7 +105,7 @@ public class InformationController {
 	@GetMapping(value = "/deleteInformation/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
-		Information info = repo.findById(id).get();
+		FamilyMember info = repo.findById(id).get();
 		try {
 			repo.delete(info);
 			map.put("message", "Information deleted successfully");

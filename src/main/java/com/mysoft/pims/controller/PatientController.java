@@ -77,6 +77,25 @@ public class PatientController {
 		}
 	}
 
+	
+	@GetMapping(value = "/getPatient/{id}")
+	public ResponseEntity<?> getPatient(@PathVariable(value = "id") Integer id) {
+		Map<String, Object> map = new HashMap<>();
+		Patient patient = repo.findById(id).get();
+		try {
+			map.put("message", "Patient deleted successfully");
+			map.put("data", patient);
+			map.put("statusCode", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Patient deletation failed");
+			map.put("data", null);
+			map.put("statusCode", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
 	@GetMapping("/getAllPatient")
 	public ResponseEntity<?> getPatient() {
 		Map<String, Object> map = new HashMap<>();
